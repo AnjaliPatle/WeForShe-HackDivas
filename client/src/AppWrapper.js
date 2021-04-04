@@ -11,7 +11,7 @@ export default function AppWrapper() {
         <div className="outer-window">
             <Navigation/>
             <div className="inner-window">
-                <Products/>
+                <Products className="product-page"/>
                 <App  open={isCallOpen} setOpen={setIsCallOpen}/>
             </div>
             <Footer/>

@@ -1,9 +1,8 @@
 import React from 'react'
+import Shirts from './Components/Shirts/Shirts'
 
 export default function Products() {
     return (
-        <div className="product-page">
-            Hello this is a product page
-        </div>
+        <Shirts />
     )
 }

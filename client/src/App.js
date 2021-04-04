@@ -384,7 +384,7 @@ function App(props) {
   }
 
   return (
-    <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 1s linear"}}>
+    <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 1s linear", minWidth: props.open? '50%': '100px'}}>
       <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
           {props.open?"Close Call Window":"Open Call Window"}
       </div>
