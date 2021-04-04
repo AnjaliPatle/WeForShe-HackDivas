@@ -48,10 +48,8 @@ function App(props) {
   const myPeer=useRef();
 
   let landingHTML=<>
-    <div className="app-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 1s linear"}}>
-      <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
-          {props.open?"Close Call Window":"Open Call Window"}
-      </div>
+    <div className="app-window" >
+      
       <div className="u-margin-top-xxlarge u-margin-bottom-xxlarge">
     <div className="o-wrapper-l">
         <div className="hero flex flex-column">
@@ -386,7 +384,10 @@ function App(props) {
   }
 
   return (
-    <>
+    <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 1s linear"}}>
+      <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
+          {props.open?"Close Call Window":"Open Call Window"}
+      </div>
       <div style={{display: renderLanding()}}>
         {landingHTML}
         <Rodal 
@@ -419,7 +420,7 @@ function App(props) {
           {hangUp}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
