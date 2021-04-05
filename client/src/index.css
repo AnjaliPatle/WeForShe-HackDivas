@@ -377,7 +377,7 @@ body {
 
 .partnerVideoContainer{
   width: 80%;
-  height: 50%;
+  height: 40%;
   z-index: 99;
   background-color: rgba(0,0,0,0.075);
 }
@@ -406,7 +406,7 @@ body {
 .iconContainer{
   padding: 10px;
   border-radius: 50%;
-  border: 2px solid var(--primary-color);
+  border: 2px solid white;
   width: 1.25rem;
   height: 1.25rem;
   cursor: pointer;

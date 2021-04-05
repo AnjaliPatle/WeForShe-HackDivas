@@ -50,6 +50,9 @@ io.on('connection', socket => {
     socket.on('rejected', (data)=>{
         io.to(users[data.to]).emit('rejected')
     })
+    socket.on('add-wishlist',(data)=>{
+        io.sockets.emit('get-wishlist',data)
+    })
 })
 
 const port = process.env.PORT || 8000

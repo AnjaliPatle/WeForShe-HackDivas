@@ -1,0 +1,42 @@
+
+.group-wishlist{
+    background:rgba(0,0,0,0.1);
+    max-width:25%;
+    height:41%;
+    overflow:auto;
+    border:1px solid rgba(0,0,0,0.3);
+    margin-top:64px;
+}
+.group-wishlist-heading{
+    text-align:center;
+    padding:5px;
+    background:#FD913C;
+    color:white;
+    font-weight:600;
+    position:absolute;
+    width:49.5%;
+    box-shadow:-5px 0px 5px 2px rgba(0,0,0,0.2);
+}
+.wishlist-item{
+    border:1px solid rgba(0,0,0,0.3);
+    background:rgba(0,0,0,0.2);
+    height:80px;
+    margin:5px;
+    background:white;
+    border-radius:5px;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+}
+.wishlist-item-data{
+    display:block;
+    margin:10px 15px;
+}
+.empty-wishlist{
+    text-align:center;
+    font-size:1.25rem;
+}
+.wishlist-item img{
+    height:70px;
+    width:auto;
+}

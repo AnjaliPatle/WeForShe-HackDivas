@@ -92,10 +92,15 @@ option {
   font-size: 0.8rem;
   line-height: 25px;
   color: #29303e;
+  box-shadow:2px 2px 5px 2px rgba(0,0,0,0.2);
 }
 
 .wishlist:hover {
-  background-color: #f4c2c2;
+  background-color: #F13AB1;
+  color:white;
+}
+.wishlist:active{
+  box-shadow:none;
 }
 
 .notvisible {

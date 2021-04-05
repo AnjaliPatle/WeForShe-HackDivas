@@ -1,7 +1,14 @@
 import React from "react";
+import io from "socket.io-client";
 
 const ShirtItem = (props) => {
-
+    const socket = React.useRef();
+    // React.useEffect(() => {
+    //   socket.current = io.connect("/");
+    // }, [])
+    // const addToWishlist=()=>{
+    //   socket.current.emit('add-wishlist', props.data)
+    // }
   return (
     <>
       <ul className="shirt-products-container">
@@ -16,6 +23,7 @@ const ShirtItem = (props) => {
                 />
                 <span
                   className="wishlist"
+                  // onClick={addToWishlist}
                 >
                   Add to Wishlist
                 </span>

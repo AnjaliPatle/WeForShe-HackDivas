@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import Peer from "simple-peer";
 import Rodal from 'rodal'
 import {Howl} from 'howler'
+import GroupWishlist from './Components/GroupWishlist/GroupWishlist'
 
 import  'rodal/lib/rodal.css'
 
@@ -419,6 +420,7 @@ function App(props) {
           {fullscreenButton}
           {hangUp}
         </div>
+        <GroupWishlist/>
       </div>
     </div>
   )
