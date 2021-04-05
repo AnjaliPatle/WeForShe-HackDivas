@@ -7,6 +7,7 @@ import GroupWishlist from './Components/GroupWishlist/GroupWishlist'
 
 import  'rodal/lib/rodal.css'
 
+import landingImg from './Icons/landing.jpg'
 import camera from './Icons/camera.svg'
 import camerastop from './Icons/camera-stop.svg'
 import microphone from './Icons/microphone.svg'
@@ -55,8 +56,11 @@ function App(props) {
     <div className="o-wrapper-l">
         <div className="hero flex flex-column">
             <div>
+              <div className="landing-heading">
+                <img src={landingImg} className="landing-img"/>
                 <div className="welcomeText">
                     Shop Together!
+              </div>
                 </div>
                 <div className="descriptionText">
                     Group shopping experience from the comfort of your home
@@ -78,7 +82,7 @@ function App(props) {
     </div>
     </div>
   </>
-
+  
   useEffect(() => {
     socket.current = io.connect("/");
     
@@ -385,7 +389,7 @@ function App(props) {
   }
 
   return (
-    <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 1s linear", minWidth: props.open? '50%': '100px'}}>
+    <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 0.7s linear", minWidth: props.open? '50%': '100px'}}>
       <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
           {props.open?"Close Call Window":"Open Call Window"}
       </div>

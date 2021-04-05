@@ -23,7 +23,8 @@
     width:100%;
 }
 .app-window{
-
+    position:absolute;
+    top:-75px;
 }
 
 .full-window{
@@ -53,4 +54,10 @@
     max-height: 85vh;
     overflow: scroll;
     background: red;
+}
+.landing-heading{
+}
+.landing-img{
+    width:200px;
+    margin:0px 50px;
 }

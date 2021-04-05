@@ -130,7 +130,7 @@ body {
 }
 
 .welcomeText{
-  font-size: var(--home-hero-font-size-a);
+  font-size: 3.5rem;
   color:#F13AB1;
   letter-spacing: -0.0075em;
   line-height: 1.1;
@@ -139,19 +139,19 @@ body {
 }
 
 .descriptionText{
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   line-height: 1.35;
   font-weight: var(--font-weight-text);
   letter-spacing: -0.0075em;
-  margin:25px 0px;
+  margin-top:25px;
 }
 
 .actionText{
-  font-size: var(--home-hero-font-size-d);
-  line-height: 1.35;
+  font-size: 1.6rem;
   font-weight: var(--font-weight-regular);
   letter-spacing: -0.0075em;
   margin-bottom: var(--spacing-unit);
+  margin:15px 0px;
 
 }
 
@@ -198,7 +198,7 @@ body {
 .form-input{
   padding: var(--spacing-unit) var(--spacing-unit-large);
   width: 80%;
-  margin-top:30px;
+  margin-top:20px;
   border: 3px solid rgba(var(--color-input-border),1);
   border-radius: calc(var(--rounded-radius)*2);
   font-weight: var(--font-weight-text);
