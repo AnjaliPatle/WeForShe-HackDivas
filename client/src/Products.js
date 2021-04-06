@@ -1,8 +1,8 @@
 import React from 'react'
 import Shirts from './Components/Shirts/Shirts'
 
-export default function Products() {
+export default function Products(props) {
     return (
-        <Shirts />
+        <Shirts add={props.add} />
     )
 }

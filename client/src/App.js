@@ -26,6 +26,8 @@ const ringtoneSound = new Howl({
   preload: true
 })
 
+
+
 function App(props) {
   const [yourID, setYourID] = useState("");
   const [users, setUsers] = useState({});
@@ -43,7 +45,7 @@ function App(props) {
   const [videoMuted, setVideoMuted] = useState(false)
   const [isfullscreen, setFullscreen] = useState(false)
   const [copied, setCopied] = useState(false)
-  
+  const [groupWishlist, setGroupWishlist] = useState([])
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
@@ -100,6 +102,12 @@ function App(props) {
       setCaller(data.from);
       setCallerSignal(data.signal);
     })
+
+      socket.current.on("get-wishlist", (data) => {
+          console.log("get",data, groupWishlist)
+          setGroupWishlist([...groupWishlist,data]);
+          
+       })
   }, []);
 
   function callPeer(id) {
@@ -388,9 +396,12 @@ function App(props) {
     </span>
   }
 
+   const addToGroupWishlist=(data)=>{
+       socket.current.emit('add-wishlist', data)
+     }
   return (
     <div className="inner-window">
-      <Products className="product-page"/>
+      <Products className="product-page" add={addToGroupWishlist}/>
       <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 0.7s linear", minWidth: props.open? '50%': '100px'}}>
         <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
             {props.open?"Close Call Window":"Open Call Window"}
@@ -426,7 +437,7 @@ function App(props) {
             {fullscreenButton}
             {hangUp}
           </div>
-          <GroupWishlist/>
+          <GroupWishlist items = {groupWishlist}/>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ const ShirtItems = (props) => {
   return (
     <div className="collection-container">
       <MiniNav updateSort={props.updateSort} />
-      <ShirtItem data={data} />
+      <ShirtItem data={data} add={props.add}/>
     </div>
   );
 };

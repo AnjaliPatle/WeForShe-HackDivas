@@ -3,8 +3,8 @@ import io from "socket.io-client";
 import './group-wishlist.css';
 import WishlistItem from './WishlistItem';
 
-export default function GroupWishlist() {
-    const [items,setItems]=React.useState([ {
+export default function GroupWishlist(props) {
+    {/*const [items,setItems]=React.useState([ {
     id: 1,
     src:
       "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/9162675/2019/12/3/672f1a3f-ceff-463f-8a1b-3642aaaaafdd1575363062219-HIGHLANDER-Men-White-Slim-Fit-Solid-Casual-Shirt-86115753630-4.jpg",
@@ -39,27 +39,27 @@ export default function GroupWishlist() {
     category: "Men Slim Fit Casual Shirt",
     color: "Black",
     price: 5000,
-  }])
-    const socket = React.useRef();
+  }])*/}
+    //const socket = React.useRef();
 
     // React.useEffect(() => {
     //     socket.current = io.connect("/");
-    //     socket.current.on("got-wishlist", (data) => {
-    //         console.log("got",data)
-    //         setItems([...items,data]);
-    //     })
-    // }, [])
+         //    props.passSocket.on("got-wishlist", (data) => {
+         //    console.log("got",data)
+        //     setItems([...items,data]);
+        // })
+     //}, [])
 
     return (
         <div className="group-wishlist">
             <div className="group-wishlist-heading">Group Wishlist</div>
             <div style={{height:"40px"}}></div>
             {   
-                items.length==0?
+                props.items.length==0?
                     <div className="empty-wishlist">Wishlist is empty.</div>
                 :
-                    items.map((index)=>(
-                        <WishlistItem data={items[0]}/>
+                    props.items.map((index)=>(
+                        <WishlistItem data={props.items[0]}/>
                     ))
             }
         </div>

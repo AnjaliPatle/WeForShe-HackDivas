@@ -86,12 +86,14 @@ const Shirts = (props) => {
           search={props.search}
           data={props.search}
           updateSort={updateSort}
+          add={props.add}
         />
       ) : (
         <ShirtItems
           search={props.search}
           data={filterSelected ? data : ShirtData}
           updateSort={updateSort}
+          add={props.add}
         />
       )}
     </div>
