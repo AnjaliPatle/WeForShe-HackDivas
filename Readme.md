@@ -9,7 +9,7 @@ Anjali Patle, Sakshi Bhandarkar and Priyanshi Sharma</b>
     <img src="hackerramp.PNG" alt="Logo" width="auto">
   </a>
   
-Through our proposed solution, we have tried to 
+Through our proposed solution, we have tried to build a platform that enables the user to do collaborative shopping and have tried to provide the same experience of shopping as they would have done in person together at the comfort of sitting at home. 
 
 
 ## Tech Stack
