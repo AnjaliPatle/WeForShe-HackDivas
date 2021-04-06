@@ -6,6 +6,7 @@ import {Howl} from 'howler'
 import GroupWishlist from './Components/GroupWishlist/GroupWishlist'
 import Products from './Products'
 import  'rodal/lib/rodal.css'
+import Chat from './Components/Chat/Chat'
 
 import landingImg from './Icons/landing.jpg'
 import camera from './Icons/camera.svg'
@@ -46,10 +47,12 @@ function App(props) {
   const [isfullscreen, setFullscreen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [groupWishlist, setGroupWishlist] = useState([])
+  const [messages, setMessages] = useState([])
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
   const myPeer=useRef();
+ 
 
   let landingHTML=<>
     <div className="app-window" >
@@ -103,11 +106,34 @@ function App(props) {
       setCallerSignal(data.signal);
     })
 
-      socket.current.on("get-wishlist", (data) => {
-          console.log("get",data, groupWishlist)
-          setGroupWishlist([...groupWishlist,data]);
-          
-       })
+    socket.current.on("get-wishlist", (data) => {
+      console.log("get",data, groupWishlist)
+      setGroupWishlist([...groupWishlist,data]); 
+    })
+
+       
+       var form = document.getElementById('form');
+       var input = document.getElementById('input');
+     
+       form.addEventListener('submit', function(e) {
+         e.preventDefault();
+         if (input.value) {
+           socket.current.emit('chat message', input.value);
+           //console.log('a', input.value);
+           setMessages([...messages,input.value]); 
+          // messages.push(input.value);
+          // console.log(messages, input.value);
+           input.value = '';
+         }
+       });
+
+       socket.current.on('chat message', function(msg) {
+         var item = document.createElement('li');
+         item.textContent = msg;
+         messages.appendChild(item);
+         console.log('a',item)
+         window.scrollTo(0, document.body.scrollHeight);
+       });
   }, []);
 
   function callPeer(id) {
@@ -401,7 +427,7 @@ function App(props) {
      }
   return (
     <div className="inner-window">
-      <Products className="product-page" add={addToGroupWishlist}/>
+   <Products className="product-page" add={addToGroupWishlist}/>
       <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 0.7s linear", minWidth: props.open? '50%': '100px'}}>
         <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
             {props.open?"Close Call Window":"Open Call Window"}
@@ -436,10 +462,13 @@ function App(props) {
             {screenShare}
             {fullscreenButton}
             {hangUp}
-          </div>
-          <GroupWishlist items = {groupWishlist}/>
+  </div>
+  <GroupWishlist items = {groupWishlist}/>
+    <Chat messages={messages}/>
+         
+         
         </div>
-      </div>
+          </div>
     </div>
   )
 }
