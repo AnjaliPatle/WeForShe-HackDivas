@@ -4,7 +4,7 @@ import Peer from "simple-peer";
 import Rodal from 'rodal'
 import {Howl} from 'howler'
 import GroupWishlist from './Components/GroupWishlist/GroupWishlist'
-
+import Products from './Products'
 import  'rodal/lib/rodal.css'
 
 import landingImg from './Icons/landing.jpg'
@@ -196,7 +196,7 @@ function App(props) {
         })
       })
       .catch(()=>{
-        setModalMessage('You cannot place/ receive a call without granting video and audio permissions! Please change your settings to use Cuckoo.')
+        setModalMessage('You cannot place/ receive a call without granting video and audio permissions! Please change your settings to continue.')
         setModalVisible(true)
       })
     } else {
@@ -241,7 +241,7 @@ function App(props) {
       })
     })
     .catch(()=>{
-      setModalMessage('You cannot place/ receive a call without granting video and audio permissions! Please change your settings to use Cuckoo.')
+      setModalMessage('You cannot place/ receive a call without granting video and audio permissions! Please change your settings to continue')
       setModalVisible(true)
     })
   }
@@ -389,42 +389,45 @@ function App(props) {
   }
 
   return (
-    <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 0.7s linear", minWidth: props.open? '50%': '100px'}}>
-      <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
-          {props.open?"Close Call Window":"Open Call Window"}
-      </div>
-      <div style={{display: renderLanding()}}>
-        {landingHTML}
-        <Rodal 
-          visible={modalVisible} 
-          onClose={()=>setModalVisible(false)} 
-          width={20} 
-          height={5} 
-          measure={'em'}
-          closeOnEsc={true}
-        >
-          <div>{modalMessage}</div>
-        </Rodal>
-        {incomingCall}
-      </div>
-      <div className="callContainer" style={{display: renderCall()}}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Watermark/>
-        </Suspense>
-        <div className="partnerVideoContainer">
-          {PartnerVideo}
+    <div className="inner-window">
+      <Products className="product-page"/>
+      <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 0.7s linear", minWidth: props.open? '50%': '100px'}}>
+        <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
+            {props.open?"Close Call Window":"Open Call Window"}
         </div>
-        <div className="userVideoContainer">
-          {UserVideo}
+        <div style={{display: renderLanding()}}>
+          {landingHTML}
+          <Rodal 
+            visible={modalVisible} 
+            onClose={()=>setModalVisible(false)} 
+            width={20} 
+            height={5} 
+            measure={'em'}
+            closeOnEsc={true}
+          >
+            <div>{modalMessage}</div>
+          </Rodal>
+          {incomingCall}
         </div>
-        <div className="controlsContainer flex">
-          {audioControl}
-          {videoControl}
-          {screenShare}
-          {fullscreenButton}
-          {hangUp}
+        <div className="callContainer" style={{display: renderCall()}}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Watermark/>
+          </Suspense>
+          <div className="partnerVideoContainer">
+            {PartnerVideo}
+          </div>
+          <div className="userVideoContainer">
+            {UserVideo}
+          </div>
+          <div className="controlsContainer flex">
+            {audioControl}
+            {videoControl}
+            {screenShare}
+            {fullscreenButton}
+            {hangUp}
+          </div>
+          <GroupWishlist/>
         </div>
-        <GroupWishlist/>
       </div>
     </div>
   )
