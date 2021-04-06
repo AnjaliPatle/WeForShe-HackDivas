@@ -6,7 +6,7 @@ Collaborative Shopping</b>
 Anjali Patle, Sakshi Bhandarkar and Priyanshi Sharma</b>
 
 <p align="center">
-    <img src="hackerramp.PNG" alt="Logo" width="500">
+    <img src="hackerramp.PNG" alt="Logo" width="auto">
   </a>
   
 Through our proposed solution, we have tried to 
