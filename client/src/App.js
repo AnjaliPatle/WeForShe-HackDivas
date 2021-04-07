@@ -46,6 +46,7 @@ function App(props) {
   const [isfullscreen, setFullscreen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [groupWishlist, setGroupWishlist] = useState([])
+  const groupWishlistRef=useRef(groupWishlist)
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
@@ -84,7 +85,13 @@ function App(props) {
     </div>
     </div>
   </>
-  
+  React.useEffect(() => {
+        // This effect executes on every render (no dependency array specified).
+        // Any change to the "participants" state will trigger a re-render
+        // which will then cause this effect to capture the current "participants"
+        // value in "participantsRef.current".
+        groupWishlistRef.current = groupWishlist;
+    });
   useEffect(() => {
     socket.current = io.connect("/");
     
@@ -102,13 +109,16 @@ function App(props) {
       setCaller(data.from);
       setCallerSignal(data.signal);
     })
-
-      socket.current.on("get-wishlist", (data) => {
-          console.log("get",data, groupWishlist)
-          setGroupWishlist([...groupWishlist,data]);
-          
-       })
+    socket.current.on("get-wishlist", (data) => {
+        setGroupWishlist([...groupWishlistRef.current,data]);
+        handleGroupWishlist(data,groupWishlistRef.current)
+    })
+      
   }, []);
+
+  const handleGroupWishlist=(data,items)=>{
+    setGroupWishlist([...items,data]);
+  }
 
   function callPeer(id) {
     if(id!=='' && users[id] && id!==yourID){
@@ -437,7 +447,7 @@ function App(props) {
             {fullscreenButton}
             {hangUp}
           </div>
-          <GroupWishlist items = {groupWishlist}/>
+         <GroupWishlist items = {groupWishlistRef.current}/>
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ const ShirtItem = (props) => {
                 />
                 <span
                   className="wishlist"
-                   onClick={() => props.add(props.data)}
+                   onClick={() => props.add(product)}
                 >
                   Add to Wishlist
                 </span>

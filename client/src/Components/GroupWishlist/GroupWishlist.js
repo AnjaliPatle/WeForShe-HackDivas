@@ -49,7 +49,6 @@ export default function GroupWishlist(props) {
         //     setItems([...items,data]);
         // })
      //}, [])
-
     return (
         <div className="group-wishlist">
             <div className="group-wishlist-heading">Group Wishlist</div>
@@ -58,8 +57,8 @@ export default function GroupWishlist(props) {
                 props.items.length==0?
                     <div className="empty-wishlist">Wishlist is empty.</div>
                 :
-                    props.items.map((index)=>(
-                        <WishlistItem data={props.items[0]}/>
+                    props.items.map((item,index)=>(
+                        <WishlistItem data={props.items[index]}/>
                     ))
             }
         </div>
