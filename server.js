@@ -7,11 +7,6 @@ const io = socket(server)
 const username = require('username-generator')
 const { v4: uuidv4 } = require('uuid');
 const path = require('path')
-const { AwakeHeroku } = require('awake-heroku');
-
-AwakeHeroku.add({
-    url: "https://cuckooapp.herokuapp.com"
-})
 
 app.use(express.static('./client/build'));
 
@@ -52,6 +47,9 @@ io.on('connection', socket => {
     })
     socket.on('add-wishlist',(data)=>{
         io.sockets.emit('get-wishlist',data)
+    })
+    socket.on('add-chat',(data)=>{
+        io.sockets.emit('get-chat',data)
     })
 })
 

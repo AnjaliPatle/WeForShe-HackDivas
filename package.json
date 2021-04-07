@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "description": "Server for React video chat client",
   "main": "server.js",
-  "repository": "https://github.com/somikdatta/video-chat-react-server.git",
-  "author": "Somik Datta <developersomik@gmail.com>",
-  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "restart": "nodemon server.js --max-old-space-size=2048"
+  },
+  "repository": "https://github.com/AnjaliPatle/WeForShe-HackDivas",
+  "author": "Team Hackdivas",
   "dependencies": {
     "awake-heroku": "^1.0.17",
     "express": "^4.17.1",

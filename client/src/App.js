@@ -6,6 +6,7 @@ import {Howl} from 'howler'
 import GroupWishlist from './Components/GroupWishlist/GroupWishlist'
 import Products from './Products'
 import  'rodal/lib/rodal.css'
+import Chat from './Components/Chat/Chat'
 
 import landingImg from './Icons/landing.jpg'
 import camera from './Icons/camera.svg'
@@ -46,11 +47,14 @@ function App(props) {
   const [isfullscreen, setFullscreen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [groupWishlist, setGroupWishlist] = useState([])
-  const groupWishlistRef=useRef(groupWishlist)
+  const [messages, setMessages] = useState([])
+  const groupWishlistRef = useRef(groupWishlist)
+  const messagesRef = useRef(messages)
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
   const myPeer=useRef();
+ 
 
   let landingHTML=<>
     <div className="app-window" >
@@ -91,6 +95,7 @@ function App(props) {
         // which will then cause this effect to capture the current "participants"
         // value in "participantsRef.current".
         groupWishlistRef.current = groupWishlist;
+        messagesRef.current = messages;
     });
   useEffect(() => {
     socket.current = io.connect("/");
@@ -109,15 +114,27 @@ function App(props) {
       setCaller(data.from);
       setCallerSignal(data.signal);
     })
+
     socket.current.on("get-wishlist", (data) => {
-        setGroupWishlist([...groupWishlistRef.current,data]);
-        handleGroupWishlist(data,groupWishlistRef.current)
-    })
+      setGroupWishlist([...groupWishlistRef.current,data]);
+      handleGroupWishlist(data,groupWishlistRef.current)
+  })
+
+    socket.current.on('get-chat', (msg) => {
+      setMessages([...messagesRef.current,msg]);
+      handleMessages(msg, messagesRef.current)
+      console.log('a',msg)
+    });
       
   }, []);
 
   const handleGroupWishlist=(data,items)=>{
     setGroupWishlist([...items,data]);
+  }
+
+  const handleMessages=(data,items)=>{
+    console.log("msg aaya")
+    setMessages([...items,data]);
   }
 
   function callPeer(id) {
@@ -409,6 +426,10 @@ function App(props) {
    const addToGroupWishlist=(data)=>{
        socket.current.emit('add-wishlist', data)
      }
+
+    const addToMessages=(data)=>[
+      socket.current.emit('add-chat', data)
+    ]
   return (
     <div className="inner-window">
       <Products className="product-page" add={addToGroupWishlist}/>
@@ -447,7 +468,9 @@ function App(props) {
             {fullscreenButton}
             {hangUp}
           </div>
-         <GroupWishlist items = {groupWishlistRef.current}/>
+          <GroupWishlist items={groupWishlistRef.current} />
+          <Chat messages={messagesRef.current} add={addToMessages}/>
+         
         </div>
       </div>
     </div>
@@ -455,3 +478,4 @@ function App(props) {
 }
 
 export default App;
+
