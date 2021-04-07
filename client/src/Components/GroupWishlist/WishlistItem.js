@@ -19,7 +19,9 @@ export default function WishlistItem(props) {
                 </span>
             </div>
                 
-            <div>
+            <div style={{textAlign:"center"}}>
+                <div style={{fontSize:"1.75rem",fontWeight:"600"}}>+</div>
+                <div style={{fontSize:"0.75rem"}}>Add To Your Cart</div>
             </div>
         </div>
     )
