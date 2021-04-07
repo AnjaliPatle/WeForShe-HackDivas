@@ -2,9 +2,6 @@
 <b>Theme:
 Collaborative Shopping</b>
 
-<b>Members:
-Anjali Patle, Sakshi Bhandarkar and Priyanshi Sharma</b>
-
 <p align="center">
     <img src="hackerramp.PNG" alt="Logo" width="auto">
   </a>
