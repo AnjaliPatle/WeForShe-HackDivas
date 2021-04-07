@@ -4,7 +4,7 @@
     background-color: rgba(var(--color-dark-background),1);
     text-align: center;
     color: var(--grey-1);
-    padding: var(--spacing-unit-xxlarge) 0;
+    padding: 20px;
   }
   
   .footerContainer{

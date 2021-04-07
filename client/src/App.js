@@ -48,6 +48,7 @@ function App(props) {
   const [copied, setCopied] = useState(false)
   const [groupWishlist, setGroupWishlist] = useState([])
   const [messages, setMessages] = useState([])
+  const groupWishlistRef=useRef(groupWishlist)
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
@@ -87,7 +88,13 @@ function App(props) {
     </div>
     </div>
   </>
-  
+  React.useEffect(() => {
+        // This effect executes on every render (no dependency array specified).
+        // Any change to the "participants" state will trigger a re-render
+        // which will then cause this effect to capture the current "participants"
+        // value in "participantsRef.current".
+        groupWishlistRef.current = groupWishlist;
+    });
   useEffect(() => {
     socket.current = io.connect("/");
     
@@ -107,25 +114,23 @@ function App(props) {
     })
 
     socket.current.on("get-wishlist", (data) => {
-      console.log("get",data, groupWishlist)
-      setGroupWishlist([...groupWishlist,data]); 
-    })
-
-       
-       var form = document.getElementById('form');
-       var input = document.getElementById('input');
-     
-       form.addEventListener('submit', function(e) {
-         e.preventDefault();
-         if (input.value) {
-           socket.current.emit('chat message', input.value);
-           //console.log('a', input.value);
-           setMessages([...messages,input.value]); 
-          // messages.push(input.value);
-          // console.log(messages, input.value);
-           input.value = '';
-         }
-       });
+      setGroupWishlist([...groupWishlistRef.current,data]);
+      handleGroupWishlist(data,groupWishlistRef.current)
+  })
+    var form = document.getElementById('form');
+    var input = document.getElementById('input');
+  
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (input.value) {
+        socket.current.emit('chat message', input.value);
+        //console.log('a', input.value);
+        setMessages([...messages,input.value]); 
+      // messages.push(input.value);
+      // console.log(messages, input.value);
+        input.value = '';
+      }
+    });
 
        socket.current.on('chat message', function(msg) {
          var item = document.createElement('li');
@@ -134,7 +139,12 @@ function App(props) {
          console.log('a',item)
          window.scrollTo(0, document.body.scrollHeight);
        });
+      
   }, []);
+
+  const handleGroupWishlist=(data,items)=>{
+    setGroupWishlist([...items,data]);
+  }
 
   function callPeer(id) {
     if(id!=='' && users[id] && id!==yourID){
@@ -462,11 +472,9 @@ function App(props) {
             {screenShare}
             {fullscreenButton}
             {hangUp}
-  </div>
-  <GroupWishlist items = {groupWishlist}/>
-    <Chat messages={messages}/>
-         
-         
+          </div>
+         <GroupWishlist items = {groupWishlistRef.current}/>
+         <Chat messages={messages}/>
         </div>
           </div>
     </div>
