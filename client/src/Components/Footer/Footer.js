@@ -7,7 +7,7 @@ function Footer() {
         <footer className="footerWrapper">
             <div className="footerContainer">
                 <div className="disclaimer">
-                    You need to allow access to video and audio to place calls.<br/>
+                    <b>A Group Shopping Experience from the comfort of your home!</b>&nbsp; Please allow access to camera and microphone to place calls.<br/>
                 </div>
             </div>
         </footer>
