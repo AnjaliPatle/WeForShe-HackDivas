@@ -119,26 +119,11 @@ function App(props) {
       setGroupWishlist([...groupWishlistRef.current,data]);
       handleGroupWishlist(data,groupWishlistRef.current)
   })
-    var form = document.getElementById('form');
-    var input = document.getElementById('input');
-  
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (input.value) {
-        socket.current.emit('chat-message', input.value);
-        setMessages([...messages,input.value]);
-        handleMessages(input.value, messagesRef.current)
-        input.value = '';
-      }
-    });
 
-    socket.current.on('chat-message', function(msg) {
-      var item = document.createElement('li');
-      item.textContent = msg;
-      setMessages([...messages,item]);
-      handleMessages(item, messagesRef.current)
-      console.log('a',item)
-      window.scrollTo(0, document.body.scrollHeight);
+    socket.current.on('get-chat', (msg) => {
+      setMessages([...messagesRef.current,msg]);
+      handleMessages(msg, messagesRef.current)
+      console.log('a',msg)
     });
       
   }, []);
@@ -148,6 +133,7 @@ function App(props) {
   }
 
   const handleMessages=(data,items)=>{
+    console.log("msg aaya")
     setMessages([...items,data]);
   }
 
@@ -442,11 +428,11 @@ function App(props) {
      }
 
     const addToMessages=(data)=>[
-      socket.current.emit('chat-message', data)
+      socket.current.emit('add-chat', data)
     ]
   return (
     <div className="inner-window">
-   <Products className="product-page" add={addToGroupWishlist}/>
+      <Products className="product-page" add={addToGroupWishlist}/>
       <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 0.7s linear", minWidth: props.open? '50%': '100px'}}>
         <div className="arrow" style={{left:props.open?'-45px':'-90px'}} onClick={()=>props.setOpen(!props.open)}>
             {props.open?"Close Call Window":"Open Call Window"}
@@ -482,11 +468,14 @@ function App(props) {
             {fullscreenButton}
             {hangUp}
           </div>
-         <Chat messages={messagesRef.current} add={addToMessages}/>
+          <GroupWishlist items={groupWishlistRef.current} />
+          <Chat messages={messagesRef.current} add={addToMessages}/>
+         
+        </div>
       </div>
-          </div>
     </div>
   )
 }
 
 export default App;
+

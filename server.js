@@ -48,6 +48,9 @@ io.on('connection', socket => {
     socket.on('add-wishlist',(data)=>{
         io.sockets.emit('get-wishlist',data)
     })
+    socket.on('add-chat',(data)=>{
+        io.sockets.emit('get-chat',data)
+    })
 })
 
 const port = process.env.PORT || 8000
