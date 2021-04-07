@@ -12,7 +12,7 @@ export default function AppWrapper() {
             <div className="inner-window">
                 <App  open={isCallOpen} setOpen={setIsCallOpen}/>
             </div>
-            <Footer/>
+        {/*   <Footer/>*/}
         </div>
     )
 }

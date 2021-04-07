@@ -48,7 +48,8 @@ function App(props) {
   const [copied, setCopied] = useState(false)
   const [groupWishlist, setGroupWishlist] = useState([])
   const [messages, setMessages] = useState([])
-  const groupWishlistRef=useRef(groupWishlist)
+  const groupWishlistRef = useRef(groupWishlist)
+  const messagesRef = useRef(messages)
   const userVideo = useRef();
   const partnerVideo = useRef();
   const socket = useRef();
@@ -94,6 +95,7 @@ function App(props) {
         // which will then cause this effect to capture the current "participants"
         // value in "participantsRef.current".
         groupWishlistRef.current = groupWishlist;
+        messagesRef.current = messages;
     });
   useEffect(() => {
     socket.current = io.connect("/");
@@ -123,27 +125,30 @@ function App(props) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       if (input.value) {
-        socket.current.emit('chat message', input.value);
-        //console.log('a', input.value);
-        setMessages([...messages,input.value]); 
-      // messages.push(input.value);
-      // console.log(messages, input.value);
+        socket.current.emit('chat-message', input.value);
+        setMessages([...messages,input.value]);
+        handleMessages(input.value, messagesRef.current)
         input.value = '';
       }
     });
 
-       socket.current.on('chat message', function(msg) {
-         var item = document.createElement('li');
-         item.textContent = msg;
-         messages.appendChild(item);
-         console.log('a',item)
-         window.scrollTo(0, document.body.scrollHeight);
-       });
+    socket.current.on('chat-message', function(msg) {
+      var item = document.createElement('li');
+      item.textContent = msg;
+      setMessages([...messages,item]);
+      handleMessages(item, messagesRef.current)
+      console.log('a',item)
+      window.scrollTo(0, document.body.scrollHeight);
+    });
       
   }, []);
 
   const handleGroupWishlist=(data,items)=>{
     setGroupWishlist([...items,data]);
+  }
+
+  const handleMessages=(data,items)=>{
+    setMessages([...items,data]);
   }
 
   function callPeer(id) {
@@ -435,6 +440,10 @@ function App(props) {
    const addToGroupWishlist=(data)=>{
        socket.current.emit('add-wishlist', data)
      }
+
+    const addToMessages=(data)=>[
+      socket.current.emit('chat-message', data)
+    ]
   return (
     <div className="inner-window">
    <Products className="product-page" add={addToGroupWishlist}/>
@@ -473,9 +482,8 @@ function App(props) {
             {fullscreenButton}
             {hangUp}
           </div>
-         <GroupWishlist items = {groupWishlistRef.current}/>
-         <Chat messages={messages}/>
-        </div>
+         <Chat messages={messagesRef.current} add={addToMessages}/>
+      </div>
           </div>
     </div>
   )
