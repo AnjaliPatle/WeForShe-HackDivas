@@ -1,5 +1,6 @@
 {
   "name": "video-chat-server",
+  "homepage":"https://hackdivas-shopping.herokuapp.com/",
   "version": "0.1.0",
   "description": "Server for React video chat client",
   "main": "server.js",
