@@ -21,6 +21,12 @@ Through our proposed solution, we have tried to build a platform that enables th
 * <b>Group Wish List</b> -where everyone can save, suggest, add and view items introducing visibility and accessibility to each other’s choices.
 * <b>Group Chat</b>- We have provided the users with chat feature where they can share their ideas and thoughts in real time, while still sharing their screens.
 
+## A Glimpse
+
+<p align="center">
+    <img src="ss.jpg" alt="ss" width="auto">
+  </a>
+
 ## Team HackDivas
 
 * Priyanshi Sharma
