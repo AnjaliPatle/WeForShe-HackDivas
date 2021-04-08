@@ -15,9 +15,7 @@ AwakeHeroku.add({
 
 app.use(express.static('./client/build'));
 
-app.get('*', (req,res)=>{
-    res.sendFile(path.resolve(__dirname, "client","build","index.html"));
-})
+
 
 const users={}
 console.log("ok")
