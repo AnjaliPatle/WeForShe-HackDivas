@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "homepage":"https://hackdivas-shopping.herokuapp.com/",
   "version": "0.1.0",
   "proxy": "http://localhost:8000",
   "private": true,
