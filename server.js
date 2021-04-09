@@ -4,7 +4,6 @@ const app = express()
 const server = http.createServer(app)
 const socket = require('socket.io')
 const io = socket(server)
-const username = require('username-generator')
 const { v4: uuidv4 } = require('uuid');
 const path = require('path')
 const { AwakeHeroku } = require('awake-heroku');
@@ -22,12 +21,11 @@ app.get('*', (req,res)=>{
 const users={}
 console.log("ok")
 io.on('connection', socket => {
-    //generate username against a socket connection and store it
     const userid=uuidv4()
     if(!users[userid]){
         users[userid] = socket.id
     }
-    //send back username
+    
     socket.emit('yourID', userid)
     io.sockets.emit('allUsers', users)
     

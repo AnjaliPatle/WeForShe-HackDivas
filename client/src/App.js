@@ -9,6 +9,7 @@ import  'rodal/lib/rodal.css'
 import Chat from './Components/Chat/Chat'
 
 import landingImg from './Icons/landing.jpg'
+import logo from './Components/Images/myntra-logo.svg'
 import camera from './Icons/camera.svg'
 import camerastop from './Icons/camera-stop.svg'
 import microphone from './Icons/microphone.svg'
@@ -30,11 +31,14 @@ const ringtoneSound = new Howl({
 
 
 function App(props) {
+  const [username,setUsername]=useState("")
+  const [usernameModal,setUsernameModal]=useState(true)
   const [yourID, setYourID] = useState("");
   const [users, setUsers] = useState({});
   const [stream, setStream] = useState();
   const [receivingCall, setReceivingCall] = useState(false);
   const [caller, setCaller] = useState("");
+  const [callerUsername,setCallerUsername]=useState("")
   const [callingFriend, setCallingFriend] = useState(false);
   const [callerSignal, setCallerSignal] = useState();
   const [callAccepted, setCallAccepted] = useState(false);
@@ -98,6 +102,7 @@ function App(props) {
         messagesRef.current = messages;
     });
   useEffect(() => {
+    
     socket.current = io.connect("/");
     
 
@@ -111,7 +116,8 @@ function App(props) {
     socket.current.on("hey", (data) => {
       setReceivingCall(true);
       ringtoneSound.play();
-      setCaller(data.from);
+      setCaller(data.from.id);
+      setCallerUsername(data.from.username)
       setCallerSignal(data.signal);
     })
 
@@ -127,6 +133,10 @@ function App(props) {
     });
       
   }, []);
+
+  const handleUsername=()=>{
+      setUsernameModal(false);
+  }
 
   const handleGroupWishlist=(data,items)=>{
     setGroupWishlist([...items,data]);
@@ -152,16 +162,6 @@ function App(props) {
           config: {
     
             iceServers: [
-                // {
-                //     urls: "stun:numb.viagenie.ca",
-                //     username: "sultan1640@gmail.com",
-                //     credential: "98376683"
-                // },
-                // {
-                //     urls: "turn:numb.viagenie.ca",
-                //     username: "sultan1640@gmail.com",
-                //     credential: "98376683"
-                // }
                 {url:'stun:stun01.sipphone.com'},
                 {url:'stun:stun.ekiga.net'},
                 {url:'stun:stun.fwdnet.net'},
@@ -204,7 +204,7 @@ function App(props) {
         myPeer.current=peer;
     
         peer.on("signal", data => {
-          socket.current.emit("callUser", { userToCall: id, signalData: data, from: yourID })
+          socket.current.emit("callUser", { userToCall: id, signalData: data, from:{username,id:yourID} })
         })
     
         peer.on("stream", stream => {
@@ -235,7 +235,7 @@ function App(props) {
         setModalVisible(true)
       })
     } else {
-      setModalMessage('We think the username entered is wrong. Please check again and retry!')
+      setModalMessage('We think the code entered is wrong. Please check again and retry!')
       setModalVisible(true)
       return
     }
@@ -369,10 +369,10 @@ function App(props) {
     incomingCall = (
       <div className="incomingCallContainer">
         <div className="incomingCall flex flex-column">
-          <div><span className="callerID">{caller}</span> is calling you!</div>
+          <div><span className="callerID">{callerUsername}</span> is calling you!</div>
           <div className="incomingCallButtons flex">
-          <button name="accept" className="alertButtonPrimary" onClick={()=>acceptCall()}>Accept</button>
-          <button name="reject" className="alertButtonSecondary" onClick={()=>rejectCall()}>Reject</button>
+          <button name="accept" className="alertButtonPrimary" style={{color:"white",background:"#F13AB1"}} onClick={()=>acceptCall()}>Accept</button>
+          <button name="reject" className="alertButtonSecondary" style={{color:"white"}} onClick={()=>rejectCall()}>Reject</button>
           </div>
         </div>
       </div>
@@ -424,13 +424,30 @@ function App(props) {
   }
 
    const addToGroupWishlist=(data)=>{
-       socket.current.emit('add-wishlist', data)
+       socket.current.emit('add-wishlist', {data:data,from:username})
      }
 
     const addToMessages=(data)=>[
-      socket.current.emit('add-chat', data)
+      socket.current.emit('add-chat', {data,from:username})
     ]
   return (
+    usernameModal?
+        <Rodal 
+            visible={usernameModal} 
+            onClose={()=>setUsernameModal(false)} 
+            width={20} 
+            height={15} 
+            measure={'em'}
+            closeOnEsc={false}
+          > 
+            <div className="username-modal">
+              <img src={logo} className="username-logo"/>
+              <div className="username-text">Please enter your username</div>
+              <input placeholder="Enter Username" value={username} onChange={(e)=>setUsername(e.target.value)} className="username-input"/>
+              <button onClick={handleUsername} className="username-button">Enter</button>
+            </div>
+          </Rodal>
+    :
     <div className="inner-window">
       <Products className="product-page" add={addToGroupWishlist}/>
       <div className="full-window" style={{transform: props.open ? 'translateX(0)' : 'translateX(100%)', transition: "all 0.7s linear", minWidth: props.open? '50%': '100px'}}>
@@ -443,7 +460,7 @@ function App(props) {
             visible={modalVisible} 
             onClose={()=>setModalVisible(false)} 
             width={20} 
-            height={5} 
+            height={10} 
             measure={'em'}
             closeOnEsc={true}
           >
@@ -468,8 +485,8 @@ function App(props) {
             {fullscreenButton}
             {hangUp}
           </div>
-          <GroupWishlist items={groupWishlistRef.current} />
-          <Chat messages={messagesRef.current} add={addToMessages}/>
+          <GroupWishlist items={groupWishlistRef.current} username={username}/>
+          <Chat messages={messagesRef.current} add={addToMessages} username={username}/>
          
         </div>
       </div>

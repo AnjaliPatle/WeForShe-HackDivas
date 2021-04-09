@@ -5,21 +5,41 @@ body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSyst
 #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
 .messages-section { list-style-type: none; margin: 0; padding: 0; }
 .messages-section > li {
-     padding: 0.5rem 1rem; 
-     margin:10px 0px;
+     
 }
-.messages-section > li:nth-child(odd) { 
+.from-user-container{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.from-user { 
     background: #F13AB1; 
     color:white;
     text-align:right; 
-    margin-left:25px; 
+    margin-left:50px; 
     border-bottom-left-radius:15px;
+    padding: 0.5rem 1rem; 
+     margin:10px 0px;
+     font-style:italic;
+     width:fit-content;
+     min-width:50%;
+     max-width:80%;
 }
-.messages-section> li:nth-child(even){
-    background: #efefef; 
+.to-user{
+    background: rgba(0,0,0,0.1); 
     text-align:left; 
     margin-right:25px; 
     border-bottom-right-radius:15px;
+    padding: 0.5rem 1rem; 
+     margin:10px 0px;
+     font-style:italic;
+     width:fit-content;
+     min-width:50%;
+     max-width:80%;
+}
+.chat-username{
+    font-weight:600;
+    font-style:normal;
 }
 
 .chat-box{

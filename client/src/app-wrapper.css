@@ -61,3 +61,49 @@
     width:200px;
     margin:0px 50px;
 }
+.username-modal{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+
+}
+.username-logo{
+    width:60px;
+    margin-top:10px;
+}
+.username-text{
+    font-size:1.5rem;
+    margin-top:10px;
+}
+.username-input{
+    width:80%;
+    margin:10px;
+    padding:10px;
+    border:1px solid grey;
+    border-radius:5px;
+    margin-top:20px;
+}
+.username-input:focus{
+    border: 3px solid #F05524;
+    outline:none;
+}
+.username-button{
+    padding:5px;
+    width:80%;
+    border-radius:5px;
+    border:1px solid white;
+    box-shadow:2px 2px 8px 5px rgba(0,0,0,0.1);
+    background: #F13AB1;
+    color:white;
+    font-size:1.2rem;
+    margin-top:10px;
+    cursor:pointer;
+}
+.username-button:focus{
+    outline:none;
+}
+.username-button:active{
+    box-shadow:none;
+    outline:none;
+}

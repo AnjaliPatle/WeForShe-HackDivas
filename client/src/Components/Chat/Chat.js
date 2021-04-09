@@ -15,7 +15,12 @@ const Chat = (props) => {
                     <div className="empty-wishlist">You can start your chat!</div>
                 :
                     props.messages.map((msg,index)=>(
-                        <li>{msg}</li>
+                        <div className={msg.from==props.username?"from-user-container":"to-user-container"}>
+                            <li className={msg.from==props.username?"from-user":"to-user"}>
+                                {msg.from!=props.username?<div className="chat-username">{msg.from}</div>:null}
+                                {msg.data}
+                            </li>
+                        </div>
                     ))
             }
         </div>
