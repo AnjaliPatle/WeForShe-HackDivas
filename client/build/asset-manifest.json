@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.5fc8e0fa.chunk.css",
-    "main.js": "/static/js/main.37b5d7e4.chunk.js",
-    "main.js.map": "/static/js/main.37b5d7e4.chunk.js.map",
+    "main.css": "/static/css/main.4ac7e2ce.chunk.css",
+    "main.js": "/static/js/main.aae2aeb2.chunk.js",
+    "main.js.map": "/static/js/main.aae2aeb2.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6d155fd3.js",
     "runtime-main.js.map": "/static/js/runtime-main.6d155fd3.js.map",
     "static/css/2.190caba9.chunk.css": "/static/css/2.190caba9.chunk.css",
-    "static/js/2.330d58bb.chunk.js": "/static/js/2.330d58bb.chunk.js",
-    "static/js/2.330d58bb.chunk.js.map": "/static/js/2.330d58bb.chunk.js.map",
+    "static/js/2.4c1630ab.chunk.js": "/static/js/2.4c1630ab.chunk.js",
+    "static/js/2.4c1630ab.chunk.js.map": "/static/js/2.4c1630ab.chunk.js.map",
     "static/css/3.42bd9434.chunk.css": "/static/css/3.42bd9434.chunk.css",
     "static/js/3.d0f7f9f4.chunk.js": "/static/js/3.d0f7f9f4.chunk.js",
     "static/js/3.d0f7f9f4.chunk.js.map": "/static/js/3.d0f7f9f4.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.f1d5b47bf7c6fc4edd63a99a38170dbb.js": "/precache-manifest.f1d5b47bf7c6fc4edd63a99a38170dbb.js",
+    "precache-manifest.e4450c0f6b1720a909e087b404c7b4d0.js": "/precache-manifest.e4450c0f6b1720a909e087b404c7b4d0.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.190caba9.chunk.css.map": "/static/css/2.190caba9.chunk.css.map",
     "static/css/3.42bd9434.chunk.css.map": "/static/css/3.42bd9434.chunk.css.map",
-    "static/css/main.5fc8e0fa.chunk.css.map": "/static/css/main.5fc8e0fa.chunk.css.map",
-    "static/js/2.330d58bb.chunk.js.LICENSE.txt": "/static/js/2.330d58bb.chunk.js.LICENSE.txt",
+    "static/css/main.4ac7e2ce.chunk.css.map": "/static/css/main.4ac7e2ce.chunk.css.map",
+    "static/js/2.4c1630ab.chunk.js.LICENSE.txt": "/static/js/2.4c1630ab.chunk.js.LICENSE.txt",
     "static/media/camera-stop.svg": "/static/media/camera-stop.85f8745d.svg",
     "static/media/camera.svg": "/static/media/camera.416098c4.svg",
     "static/media/fullscreen.svg": "/static/media/fullscreen.8cb10075.svg",
@@ -33,8 +33,8 @@
   "entrypoints": [
     "static/js/runtime-main.6d155fd3.js",
     "static/css/2.190caba9.chunk.css",
-    "static/js/2.330d58bb.chunk.js",
-    "static/css/main.5fc8e0fa.chunk.css",
-    "static/js/main.37b5d7e4.chunk.js"
+    "static/js/2.4c1630ab.chunk.js",
+    "static/css/main.4ac7e2ce.chunk.css",
+    "static/js/main.aae2aeb2.chunk.js"
   ]
 }
