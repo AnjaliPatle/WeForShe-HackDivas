@@ -25,6 +25,8 @@ Through our proposed solution, we have tried to build a platform that enables th
 
 <p align="center">
     <img src="ss.jpg" alt="ss" width="auto">
+    <img src="ss11.png" alt="ss" width="auto">
+    
   </a>
 
 ## Team HackDivas
